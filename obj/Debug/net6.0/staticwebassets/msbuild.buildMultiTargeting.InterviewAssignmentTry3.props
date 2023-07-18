@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\InterviewAssignmentTry3.props" />
+</Project>

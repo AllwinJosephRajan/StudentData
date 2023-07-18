@@ -1,0 +1,91 @@
+﻿@model IEnumerable<InterviewAssignmentTry3.Models.StudentModel>
+
+    @{
+        ViewData["Title"] = "Students List";
+    }
+    <h2>@ViewData["Title"]</h2>
+
+
+@using (Html.BeginForm("Index", "Student", FormMethod.Get))
+{
+    <div class="search-section">
+        <label for="searchName">Name:</label>
+        @Html.TextBox("searchName", ViewBag.CurrentFilter as string, new { placeholder = "Enter name", @class = "textbox-outline" })
+    </div>
+    <div class="search-section">
+        <label for="searchFromDate">Enrolled Date: From:</label>
+        @Html.TextBox("searchFromDate", ViewBag.CurrentFromDate as string, new { placeholder = "MM/dd/yyyy", @class = "textbox-outline" })
+    </div>
+    <div class="search-section">
+        <label for="searchToDate">To:</label>
+        @Html.TextBox("searchToDate", ViewBag.CurrentToDate as string, new { placeholder = "MM/dd/yyyy", @class = "textbox-outline" })
+    </div>
+    <div class="search-section">
+        <input type="submit" value="Search" class="btn-search" />
+    </div>
+}
+<style>
+    .search-section {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .search-section label {
+        display: inline;
+        font-weight: bold;
+        }
+
+    .textbox-outline {
+        border: 2px solid #28588d; 
+        padding: 5px;
+    }
+
+    .btn-search {
+        background-color: #28588d;
+        color: black;
+        border: 2px solid #28588d; 
+        padding: 5px 10px;
+        cursor: pointer;
+        font-weight: bold; 
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px; 
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>Student ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Enrolled Date</th>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.StudentId</td>
+            <td>@student.FirstName</td>
+            <td>@student.LastName</td>
+            <td>@student.Age</td>
+            <td>@student.EnrolledDate.ToShortDateString()</td>
+        </tr>
+    }
+</table>
